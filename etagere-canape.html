@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JB4WOOD - Étagère Canapé | Sylvie</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f0eb;
+            color: #3a2e26;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: #3a2e26;
+            color: #f5f0eb;
+            padding: 16px 24px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        header p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        .viewer-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+            gap: 12px;
+        }
+        model-viewer {
+            width: 100%;
+            flex: 1;
+            min-height: 55vh;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --poster-color: #f5f0eb;
+        }
+        model-viewer::part(default-ar-button) {
+            bottom: 16px;
+            right: 16px;
+        }
+        .instructions {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .instructions h2 {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        .instructions ul {
+            font-size: 0.85rem;
+            padding-left: 20px;
+            line-height: 1.6;
+            color: #5a4a3a;
+        }
+        .nav-link {
+            display: block;
+            text-align: center;
+            padding: 14px;
+            background: #3a2e26;
+            color: #f5f0eb;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .nav-link:hover { background: #4a3e36; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>JB4WOOD</h1>
+        <p>Étagère Canapé - Projet Sylvie</p>
+    </header>
+    <div class="viewer-container">
+        <model-viewer
+            src="etagere-canape.glb"
+            alt="Étagère murale côté canapé - JB4WOOD"
+            ar
+            ar-modes="webxr scene-viewer quick-look"
+            camera-controls
+            touch-action="pan-y"
+            auto-rotate
+            shadow-intensity="1"
+            exposure="1"
+            loading="eager"
+        >
+            <button slot="ar-button" style="
+                background: #3a2e26;
+                color: #f5f0eb;
+                border: none;
+                border-radius: 8px;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                cursor: pointer;
+                position: absolute;
+                bottom: 16px;
+                right: 16px;
+            ">
+                Voir dans ma pièce
+            </button>
+        </model-viewer>
+        <div class="instructions">
+            <h2>Comment tester dans votre pièce ?</h2>
+            <ul>
+                <li>Tournez le modèle avec le doigt pour le voir sous tous les angles</li>
+                <li>Pincez pour zoomer / dézoomer</li>
+                <li>Appuyez sur <strong>"Voir dans ma pièce"</strong> pour placer l'étagère dans votre salon via la caméra</li>
+                <li>Déplacez l'étagère en la faisant glisser sur le sol/mur</li>
+            </ul>
+        </div>
+        <a href="etagere-tv.html" class="nav-link">Voir l'étagère TV &rarr;</a>
+    </div>
+</body>
+</html>
