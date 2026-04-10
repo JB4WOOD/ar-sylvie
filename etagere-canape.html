@@ -2,30 +2,34 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>JB4WOOD - Étagère Canapé | Sylvie</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
         :root {
-            --wood-dark: #2c1e14;
-            --wood-mid: #5a3e2b;
-            --cream: #faf6f1;
-            --cream-dark: #f0e8dd;
-            --gold: #c8a45e;
-            --gold-light: #e8d5a0;
-            --text: #3a2e26;
-            --text-soft: #6b5d52;
+            --vert: #1a4a2e;
+            --vert-light: #24633e;
+            --or-bois: #b8954a;
+            --or-clair: #d4b06a;
+            --beton: #e8e4e0;
+            --beton-light: #f0edea;
+            --blanc: #ffffff;
+            --text: #2a2520;
+            --text-soft: #6b6058;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--cream);
+            background: var(--beton);
             color: var(--text);
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
@@ -33,81 +37,72 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--wood-dark) 0%, var(--wood-mid) 100%);
-            color: var(--cream);
-            padding: 16px 24px;
+            background: linear-gradient(135deg, var(--vert) 0%, var(--vert-light) 100%);
+            color: var(--blanc);
+            padding: 14px 18px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             position: relative;
-            overflow: hidden;
             z-index: 10;
+            flex-shrink: 0;
         }
 
         header::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(200,164,94,0.1) 0%, transparent 50%);
-        }
-
-        .header-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            z-index: 1;
-            flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .header-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .header-text {
-            flex: 1;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header-text h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-        }
-
-        .header-text p {
-            font-size: 0.75rem;
-            opacity: 0.6;
-            margin-top: 2px;
-            font-weight: 300;
+            background: linear-gradient(135deg, rgba(184,149,74,0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .back-btn {
-            position: relative;
-            z-index: 1;
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.1);
+            position: relative; z-index: 1;
+            width: 34px; height: 34px;
+            border-radius: 9px;
+            background: rgba(255,255,255,0.12);
             border: none;
-            color: var(--cream);
-            font-size: 1.1rem;
+            color: var(--blanc);
+            font-size: 1rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             text-decoration: none;
             transition: background 0.3s;
             flex-shrink: 0;
         }
 
-        .back-btn:hover { background: rgba(255,255,255,0.2); }
+        .back-btn:hover { background: rgba(255,255,255,0.22); }
+
+        .header-logo {
+            width: 36px; height: 36px;
+            border-radius: 9px;
+            overflow: hidden;
+            position: relative; z-index: 1;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .header-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+        .header-text {
+            flex: 1;
+            position: relative; z-index: 1;
+        }
+
+        .header-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+        }
+
+        .header-text p {
+            font-size: 0.72rem;
+            opacity: 0.6;
+            margin-top: 1px;
+            font-weight: 300;
+        }
 
         /* Viewer */
         .viewer-section {
@@ -115,263 +110,199 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            min-height: 0;
         }
 
         model-viewer {
             width: 100%;
             flex: 1;
-            min-height: 50vh;
-            background: linear-gradient(180deg, #f7f3ee 0%, #ede5da 100%);
+            background: linear-gradient(180deg, var(--beton-light) 0%, var(--beton) 100%);
             --poster-color: transparent;
-            --progress-bar-color: var(--gold);
+            --progress-bar-color: var(--vert);
             --progress-bar-height: 3px;
         }
 
-        /* Custom AR button */
-        .ar-button-custom {
-            background: linear-gradient(135deg, var(--wood-dark), var(--wood-mid));
-            color: var(--cream);
+        /* AR button */
+        .ar-btn {
+            background: linear-gradient(135deg, var(--vert), var(--vert-light));
+            color: var(--blanc);
             border: none;
             border-radius: 14px;
-            padding: 14px 24px;
+            padding: 13px 22px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
             cursor: pointer;
             position: absolute;
-            bottom: 20px;
+            bottom: 16px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 8px 32px rgba(44,30,20,0.3);
+            box-shadow: 0 6px 24px rgba(26,74,46,0.35);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 5;
             white-space: nowrap;
         }
 
-        .ar-button-custom:hover {
-            transform: translateX(-50%) translateY(-2px) scale(1.03);
-            box-shadow: 0 12px 40px rgba(44,30,20,0.4);
+        .ar-btn:hover {
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 10px 32px rgba(26,74,46,0.45);
         }
 
-        .ar-button-custom:active {
-            transform: translateX(-50%) scale(0.97);
-        }
+        .ar-btn:active { transform: translateX(-50%) scale(0.97); }
 
-        .ar-button-custom .ar-icon {
-            width: 24px;
-            height: 24px;
-            background: rgba(200,164,94,0.25);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-        }
-
-        .ar-button-custom .pulse-ring {
+        .ar-btn .ring {
             position: absolute;
             inset: -3px;
             border-radius: 17px;
-            border: 2px solid var(--gold);
+            border: 2px solid var(--or-bois);
             opacity: 0;
             animation: arPulse 2.5s ease-out infinite;
         }
 
         @keyframes arPulse {
-            0% { opacity: 0.6; transform: scale(1); }
-            100% { opacity: 0; transform: scale(1.08); }
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.06); }
         }
 
-        /* Loading overlay */
-        .loading-overlay {
+        /* Loading */
+        .loading {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, #f7f3ee 0%, #ede5da 100%);
+            background: linear-gradient(180deg, var(--beton-light) 0%, var(--beton) 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 16px;
+            gap: 14px;
             z-index: 3;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.5s, visibility 0.5s;
         }
 
-        .loading-overlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
+        .loading.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-        .loader {
-            width: 48px;
-            height: 48px;
-            border: 3px solid var(--cream-dark);
-            border-top-color: var(--gold);
+        .spinner {
+            width: 44px; height: 44px;
+            border: 3px solid var(--beton);
+            border-top-color: var(--vert);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 0.9s linear infinite;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .loading-text {
-            font-size: 0.85rem;
-            color: var(--text-soft);
-            font-weight: 400;
-        }
+        .loading span { font-size: 0.82rem; color: var(--text-soft); }
 
         /* Bottom panel */
-        .bottom-panel {
-            background: white;
-            border-radius: 24px 24px 0 0;
-            padding: 24px 20px 28px;
-            box-shadow: 0 -4px 30px rgba(44,30,20,0.06);
-            position: relative;
+        .panel {
+            background: var(--blanc);
+            border-radius: 22px 22px 0 0;
+            padding: 20px 18px 24px;
+            box-shadow: 0 -4px 24px rgba(0,0,0,0.05);
             z-index: 5;
-            animation: slideUp 0.6s ease-out;
+            flex-shrink: 0;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .panel-handle {
-            width: 36px;
-            height: 4px;
-            background: var(--cream-dark);
+        .handle {
+            width: 32px; height: 4px;
+            background: var(--beton);
             border-radius: 2px;
-            margin: 0 auto 18px;
+            margin: 0 auto 14px;
         }
 
-        /* Gesture hints */
-        .gesture-grid {
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--vert);
+            margin-bottom: 10px;
+        }
+
+        /* Gestures */
+        .gestures {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 18px;
+            gap: 8px;
+            margin-bottom: 14px;
         }
 
-        .gesture-item {
+        .gesture {
             text-align: center;
-            padding: 12px 6px;
-            background: var(--cream);
-            border-radius: 14px;
-            transition: transform 0.2s;
+            padding: 10px 4px;
+            background: var(--beton-light);
+            border-radius: 12px;
         }
 
-        .gesture-item:active { transform: scale(0.95); }
+        .gesture-icon { font-size: 1.3rem; margin-bottom: 4px; }
+        .gesture-label { font-size: 0.68rem; color: var(--text-soft); font-weight: 500; line-height: 1.3; }
+        .gesture-label strong { display: block; color: var(--text); font-size: 0.7rem; margin-bottom: 1px; }
 
-        .gesture-icon {
-            font-size: 1.4rem;
+        /* AR steps */
+        .ar-steps {
+            background: linear-gradient(135deg, rgba(26,74,46,0.05), rgba(184,149,74,0.04));
+            border: 1px solid rgba(26,74,46,0.1);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
             margin-bottom: 6px;
         }
 
-        .gesture-label {
-            font-size: 0.7rem;
-            color: var(--text-soft);
-            font-weight: 500;
-            line-height: 1.3;
-        }
+        .step:last-child { margin-bottom: 0; }
 
-        .gesture-label strong {
-            display: block;
-            color: var(--text);
-            font-size: 0.72rem;
-            margin-bottom: 2px;
-        }
-
-        /* Section title */
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--text);
-        }
-
-        /* AR instructions */
-        .ar-instructions {
-            background: linear-gradient(135deg, rgba(200,164,94,0.08), rgba(200,164,94,0.03));
-            border: 1px solid rgba(200,164,94,0.15);
-            border-radius: 14px;
-            padding: 14px 16px;
-            margin-bottom: 18px;
-        }
-
-        .ar-instructions p {
-            font-size: 0.8rem;
-            color: var(--text-soft);
-            line-height: 1.6;
-        }
-
-        .ar-instructions .step {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-
-        .ar-instructions .step:last-child { margin-bottom: 0; }
-
-        .step-num {
-            width: 22px;
-            height: 22px;
+        .step-n {
+            width: 20px; height: 20px;
             border-radius: 50%;
-            background: var(--gold);
-            color: white;
-            font-size: 0.7rem;
+            background: var(--vert);
+            color: var(--blanc);
+            font-size: 0.65rem;
             font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
             margin-top: 1px;
         }
 
-        .step-text {
-            font-size: 0.8rem;
-            color: var(--text-soft);
-            line-height: 1.5;
-        }
+        .step-t { font-size: 0.78rem; color: var(--text-soft); line-height: 1.45; }
 
-        /* Navigation */
+        /* Nav */
         .nav-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, var(--wood-dark), var(--wood-mid));
-            color: var(--cream);
+            padding: 14px;
+            background: linear-gradient(135deg, var(--vert), var(--vert-light));
+            color: var(--blanc);
             text-decoration: none;
-            border-radius: 14px;
+            border-radius: 12px;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 16px rgba(44,30,20,0.15);
+            font-size: 0.88rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px rgba(26,74,46,0.18);
         }
 
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(44,30,20,0.2);
-        }
-
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,74,46,0.25); }
         .nav-btn:active { transform: scale(0.98); }
 
-        /* Responsive */
-        @media (min-height: 800px) {
-            model-viewer { min-height: 55vh; }
+        /* Responsive height */
+        @media (max-height: 650px) {
+            .panel { padding: 14px 16px 18px; }
+            .gestures { gap: 6px; margin-bottom: 10px; }
+            .gesture { padding: 8px 4px; }
+            .ar-steps { padding: 10px 12px; margin-bottom: 10px; }
         }
 
-        @media (max-width: 360px) {
-            .gesture-grid { gap: 6px; }
-            .gesture-item { padding: 10px 4px; }
+        @media (max-height: 550px) {
+            .ar-steps { display: none; }
         }
     </style>
 </head>
@@ -386,9 +317,9 @@
     </header>
 
     <div class="viewer-section">
-        <div class="loading-overlay" id="loader">
-            <div class="loader"></div>
-            <div class="loading-text">Chargement du modèle 3D...</div>
+        <div class="loading" id="loader">
+            <div class="spinner"></div>
+            <span>Chargement du modèle 3D...</span>
         </div>
 
         <model-viewer
@@ -409,55 +340,45 @@
             loading="eager"
             interaction-prompt="auto"
         >
-            <button slot="ar-button" class="ar-button-custom">
-                <span class="pulse-ring"></span>
-                <span class="ar-icon">&#x1f4f1;</span>
-                Voir dans ma pièce
+            <button slot="ar-button" class="ar-btn">
+                <span class="ring"></span>
+                &#x1f4f1; Voir dans ma pièce
             </button>
         </model-viewer>
     </div>
 
-    <div class="bottom-panel">
-        <div class="panel-handle"></div>
+    <div class="panel">
+        <div class="handle"></div>
 
         <div class="section-title">Commandes 3D</div>
-        <div class="gesture-grid">
-            <div class="gesture-item">
+        <div class="gestures">
+            <div class="gesture">
                 <div class="gesture-icon">&#x1f446;</div>
-                <div class="gesture-label">
-                    <strong>1 doigt</strong>
-                    Tourner
-                </div>
+                <div class="gesture-label"><strong>1 doigt</strong>Tourner</div>
             </div>
-            <div class="gesture-item">
+            <div class="gesture">
                 <div class="gesture-icon">&#x1f90f;</div>
-                <div class="gesture-label">
-                    <strong>Pincer</strong>
-                    Zoomer
-                </div>
+                <div class="gesture-label"><strong>Pincer</strong>Zoomer</div>
             </div>
-            <div class="gesture-item">
+            <div class="gesture">
                 <div class="gesture-icon">&#x270c;&#xfe0f;</div>
-                <div class="gesture-label">
-                    <strong>2 doigts</strong>
-                    Déplacer
-                </div>
+                <div class="gesture-label"><strong>2 doigts</strong>Déplacer</div>
             </div>
         </div>
 
         <div class="section-title">En réalité augmentée</div>
-        <div class="ar-instructions">
+        <div class="ar-steps">
             <div class="step">
-                <span class="step-num">1</span>
-                <span class="step-text">Appuyez sur <strong>"Voir dans ma pièce"</strong></span>
+                <span class="step-n">1</span>
+                <span class="step-t">Appuyez sur <strong>"Voir dans ma pièce"</strong></span>
             </div>
             <div class="step">
-                <span class="step-num">2</span>
-                <span class="step-text">Visez le mur avec la caméra, l'étagère se pose automatiquement</span>
+                <span class="step-n">2</span>
+                <span class="step-t">Visez le mur avec la caméra</span>
             </div>
             <div class="step">
-                <span class="step-num">3</span>
-                <span class="step-text"><strong>1 doigt</strong> pour déplacer &middot; <strong>2 doigts</strong> pour pivoter &middot; <strong>Pincer</strong> pour redimensionner</span>
+                <span class="step-n">3</span>
+                <span class="step-t"><strong>1 doigt</strong> = déplacer &middot; <strong>2 doigts</strong> = pivoter &middot; <strong>Pincer</strong> = redimensionner</span>
             </div>
         </div>
 
@@ -467,13 +388,10 @@
     </div>
 
     <script>
-        const viewer = document.getElementById('viewer');
-        const loader = document.getElementById('loader');
-        viewer.addEventListener('load', () => {
-            loader.classList.add('hidden');
-        });
-        // Fallback si le chargement est long
-        setTimeout(() => loader.classList.add('hidden'), 8000);
+        const v = document.getElementById('viewer');
+        const l = document.getElementById('loader');
+        v.addEventListener('load', () => l.classList.add('hidden'));
+        setTimeout(() => l.classList.add('hidden'), 8000);
     </script>
 </body>
 </html>
