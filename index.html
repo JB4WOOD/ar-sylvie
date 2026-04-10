@@ -85,7 +85,12 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 20px 20px env(safe-area-inset-bottom, 16px);
+            max-width: 480px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .hero {
@@ -125,7 +130,6 @@
         }
 
         .card {
-            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -136,7 +140,7 @@
             border-radius: 20px;
             padding: 24px 22px;
             box-shadow: 0 8px 40px rgba(26,74,46,0.07), 0 2px 10px rgba(0,0,0,0.03);
-            min-height: 0;
+            width: 100%;
         }
 
         .greeting {
@@ -271,6 +275,17 @@
             position: relative;
             z-index: 10;
             flex-shrink: 0;
+            justify-content: center;
+        }
+
+        .viewer-header-inner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 720px;
+            position: relative;
+            z-index: 1;
         }
 
         .viewer-header::after {
@@ -325,6 +340,9 @@
             flex-direction: column;
             position: relative;
             min-height: 0;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         model-viewer {
@@ -405,6 +423,11 @@
             box-shadow: 0 -4px 24px rgba(0,0,0,0.05);
             z-index: 5;
             flex-shrink: 0;
+        }
+
+        .panel-inner {
+            max-width: 480px;
+            margin: 0 auto;
         }
 
         .handle {
@@ -568,11 +591,13 @@
     <!-- ═══════════ ÉTAGÈRE CANAPÉ ═══════════ -->
     <div class="screen viewer-screen" id="canape">
         <div class="viewer-header">
+            <div class="viewer-header-inner">
             <button class="btn-back" data-target="home">&larr;</button>
             <div class="header-logo"><img src="assets/logo-bois.png" alt="JB4WOOD"></div>
             <div class="header-text">
                 <h2 class="eras">Étagère Canapé</h2>
                 <p>Projet Sylvie &middot; Mur côté canapé</p>
+            </div>
             </div>
         </div>
         <div class="viewer-body">
@@ -599,6 +624,7 @@
         </div>
         <div class="panel">
             <div class="handle"></div>
+            <div class="panel-inner">
             <div class="section-title">Commandes 3D</div>
             <div class="gestures">
                 <div class="gesture"><div class="gesture-icon">&#x1f446;</div><div class="gesture-label"><strong>1 doigt</strong>Tourner</div></div>
@@ -612,17 +638,20 @@
                 <div class="step"><span class="step-n">3</span><span class="step-t"><strong>1 doigt</strong> = déplacer &middot; <strong>2 doigts</strong> = pivoter &middot; <strong>Pincer</strong> = redimensionner</span></div>
             </div>
             <button class="nav-btn" data-target="tv">Voir l'étagère TV &rarr;</button>
+            </div>
         </div>
     </div>
 
     <!-- ═══════════ ÉTAGÈRE TV ═══════════ -->
     <div class="screen viewer-screen" id="tv">
         <div class="viewer-header">
+            <div class="viewer-header-inner">
             <button class="btn-back" data-target="home">&larr;</button>
             <div class="header-logo"><img src="assets/logo-bois.png" alt="JB4WOOD"></div>
             <div class="header-text">
                 <h2 class="eras">Étagère TV</h2>
                 <p>Projet Sylvie &middot; Mur côté télévision</p>
+            </div>
             </div>
         </div>
         <div class="viewer-body">
@@ -649,6 +678,7 @@
         </div>
         <div class="panel">
             <div class="handle"></div>
+            <div class="panel-inner">
             <div class="section-title">Commandes 3D</div>
             <div class="gestures">
                 <div class="gesture"><div class="gesture-icon">&#x1f446;</div><div class="gesture-label"><strong>1 doigt</strong>Tourner</div></div>
@@ -662,6 +692,7 @@
                 <div class="step"><span class="step-n">3</span><span class="step-t"><strong>1 doigt</strong> = déplacer &middot; <strong>2 doigts</strong> = pivoter &middot; <strong>Pincer</strong> = redimensionner</span></div>
             </div>
             <button class="nav-btn" data-target="canape">&larr; Voir l'étagère Canapé</button>
+            </div>
         </div>
     </div>
 
