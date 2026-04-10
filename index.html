@@ -10,9 +10,11 @@
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
         @font-face {
-            font-family: 'Eras Bold';
-            src: url('assets/eras-bold-itc.ttf') format('truetype');
-            font-weight: bold;
+            font-family: 'ErasBold';
+            src: url('assets/eras-bold.woff2') format('woff2'),
+                 url('assets/eras-bold-itc.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
             font-display: swap;
         }
 
@@ -37,36 +39,38 @@
             background: var(--beton);
         }
 
+        /* ═══════════ ERAS BOLD PARTOUT ═══════════ */
+        .eras {
+            font-family: 'ErasBold', 'Arial Black', sans-serif;
+        }
+
         /* ═══════════ SCREENS ═══════════ */
         .screen {
             position: absolute;
             inset: 0;
-            display: flex;
+            display: none;
             flex-direction: column;
-            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease;
-            will-change: transform, opacity;
-            z-index: 1;
-        }
-
-        .screen.hidden-right {
-            transform: translateX(100%);
-            opacity: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .screen.hidden-left {
-            transform: translateX(-30%);
-            opacity: 0;
-            pointer-events: none;
             z-index: 0;
         }
 
         .screen.active {
-            transform: translateX(0);
-            opacity: 1;
-            pointer-events: auto;
+            display: flex;
             z-index: 2;
+            animation: fadeIn 0.35s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .screen.fade-back {
+            animation: fadeBack 0.35s ease-out;
+        }
+
+        @keyframes fadeBack {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         /* ═══════════ HOME ═══════════ */
@@ -81,12 +85,12 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 24px 20px env(safe-area-inset-bottom, 16px);
+            padding: 20px 20px env(safe-area-inset-bottom, 16px);
         }
 
         .hero {
             text-align: center;
-            padding: 16px 0 20px;
+            padding: 14px 0 18px;
             flex-shrink: 0;
         }
 
@@ -95,18 +99,18 @@
             height: 88px;
             border-radius: 18px;
             overflow: hidden;
-            margin: 0 auto 16px;
+            margin: 0 auto 14px;
             box-shadow: 0 6px 24px rgba(26,74,46,0.2), 0 2px 6px rgba(0,0,0,0.1);
         }
 
         .logo img { width: 100%; height: 100%; object-fit: cover; }
 
         .brand-name {
-            font-family: 'Eras Bold', 'Inter', sans-serif;
-            font-size: 2rem;
-            font-weight: bold;
+            font-family: 'ErasBold', 'Arial Black', sans-serif;
+            font-size: 2.1rem;
             color: var(--or-bois);
-            letter-spacing: 0.06em;
+            letter-spacing: 0.04em;
+            line-height: 1;
         }
 
         .brand-tagline {
@@ -117,7 +121,7 @@
             color: var(--vert);
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            margin-top: 3px;
+            margin-top: 5px;
         }
 
         .card {
@@ -167,6 +171,7 @@
             text-align: left;
             font-family: inherit;
             width: 100%;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .project-card::after {
@@ -180,7 +185,7 @@
 
         .project-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,74,46,0.3); }
         .project-card:hover::after { opacity: 1; }
-        .project-card:active { transform: scale(0.98); }
+        .project-card:active { transform: scale(0.97); }
 
         .project-icon {
             width: 44px; height: 44px;
@@ -195,9 +200,8 @@
         .project-info { flex: 1; position: relative; z-index: 1; }
 
         .project-name {
-            font-family: 'Eras Bold', 'Inter', sans-serif;
+            font-family: 'ErasBold', 'Arial Black', sans-serif;
             font-size: 0.95rem;
-            font-weight: bold;
             margin-bottom: 2px;
         }
 
@@ -289,6 +293,7 @@
             display: flex; align-items: center; justify-content: center;
             transition: background 0.3s;
             flex-shrink: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-back:hover { background: rgba(255,255,255,0.22); }
@@ -307,8 +312,7 @@
         .header-text { flex: 1; position: relative; z-index: 1; }
 
         .header-text h2 {
-            font-family: 'Eras Bold', 'Inter', sans-serif;
-            font-weight: bold;
+            font-family: 'ErasBold', 'Arial Black', sans-serif;
             font-size: 0.95rem;
             letter-spacing: 0.03em;
         }
@@ -326,6 +330,7 @@
         model-viewer {
             width: 100%;
             flex: 1;
+            min-height: 200px;
             background: linear-gradient(180deg, var(--beton-light) 0%, var(--beton) 100%);
             --poster-color: transparent;
             --progress-bar-color: var(--vert);
@@ -350,6 +355,7 @@
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 5;
             white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .ar-btn:hover { transform: translateX(-50%) translateY(-2px); box-shadow: 0 10px 32px rgba(26,74,46,0.45); }
@@ -395,7 +401,7 @@
         .panel {
             background: var(--blanc);
             border-radius: 22px 22px 0 0;
-            padding: 20px 18px 24px;
+            padding: 20px 18px env(safe-area-inset-bottom, 24px);
             box-shadow: 0 -4px 24px rgba(0,0,0,0.05);
             z-index: 5;
             flex-shrink: 0;
@@ -470,6 +476,7 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 4px 14px rgba(26,74,46,0.18);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,74,46,0.25); }
@@ -477,13 +484,13 @@
 
         /* ═══════════ RESPONSIVE ═══════════ */
         @media (max-height: 650px) {
-            .hero { padding: 8px 0 12px; }
-            .logo { width: 64px; height: 64px; }
-            .brand-name { font-size: 1.6rem; }
-            .brand-tagline { font-size: 0.72rem; }
-            .card { padding: 18px 18px; }
-            .greeting { font-size: 0.85rem; margin-bottom: 16px; }
-            .panel { padding: 14px 16px 18px; }
+            .hero { padding: 6px 0 10px; }
+            .logo { width: 60px; height: 60px; }
+            .brand-name { font-size: 1.5rem; }
+            .brand-tagline { font-size: 0.7rem; }
+            .card { padding: 16px 18px; }
+            .greeting { font-size: 0.85rem; margin-bottom: 14px; }
+            .panel { padding: 12px 16px 16px; }
             .gestures { gap: 6px; margin-bottom: 10px; }
             .gesture { padding: 8px 4px; }
             .ar-steps { padding: 10px 12px; margin-bottom: 10px; }
@@ -491,15 +498,23 @@
 
         @media (max-height: 500px) {
             .greeting { display: none; }
-            .hero { padding: 4px 0 8px; }
-            .logo { width: 48px; height: 48px; }
+            .hero { padding: 4px 0 6px; }
+            .logo { width: 44px; height: 44px; border-radius: 12px; }
             .ar-steps { display: none; }
         }
 
         @media (min-height: 800px) {
-            .logo { width: 96px; height: 96px; }
-            .brand-name { font-size: 2.2rem; }
-            .card { padding: 30px 26px; }
+            .hero { padding: 24px 0; }
+            .logo { width: 100px; height: 100px; }
+            .brand-name { font-size: 2.4rem; }
+            .card { padding: 32px 26px; }
+            .greeting { font-size: 1rem; margin-bottom: 28px; }
+        }
+
+        @media (max-width: 360px) {
+            .gestures { gap: 5px; }
+            .gesture { padding: 8px 2px; }
+            .gesture-icon { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -511,7 +526,7 @@
         <div class="home-content">
             <div class="hero">
                 <div class="logo"><img src="assets/logo-bois.png" alt="JB4WOOD"></div>
-                <div class="brand-name">JB4WOOD</div>
+                <div class="brand-name eras">JB4WOOD</div>
                 <p class="brand-tagline">Votre artisan menuisier</p>
             </div>
 
@@ -522,18 +537,18 @@
                     directement chez vous en réalité augmentée.
                 </p>
                 <div class="project-links">
-                    <button class="project-card" onclick="navigate('canape')">
+                    <button class="project-card" data-target="canape">
                         <div class="project-icon">&#x1f6cb;</div>
                         <div class="project-info">
-                            <div class="project-name">Étagère Canapé</div>
+                            <div class="project-name eras">Étagère Canapé</div>
                             <div class="project-desc">Mur côté canapé</div>
                         </div>
                         <div class="project-arrow">&rarr;</div>
                     </button>
-                    <button class="project-card" onclick="navigate('tv')">
+                    <button class="project-card" data-target="tv">
                         <div class="project-icon">&#x1f4fa;</div>
                         <div class="project-info">
-                            <div class="project-name">Étagère TV</div>
+                            <div class="project-name eras">Étagère TV</div>
                             <div class="project-desc">Mur côté télévision</div>
                         </div>
                         <div class="project-arrow">&rarr;</div>
@@ -551,12 +566,12 @@
     </div>
 
     <!-- ═══════════ ÉTAGÈRE CANAPÉ ═══════════ -->
-    <div class="screen hidden-right viewer-screen" id="canape">
+    <div class="screen viewer-screen" id="canape">
         <div class="viewer-header">
-            <button class="btn-back" onclick="navigate('home')">&larr;</button>
+            <button class="btn-back" data-target="home">&larr;</button>
             <div class="header-logo"><img src="assets/logo-bois.png" alt="JB4WOOD"></div>
             <div class="header-text">
-                <h2>Étagère Canapé</h2>
+                <h2 class="eras">Étagère Canapé</h2>
                 <p>Projet Sylvie &middot; Mur côté canapé</p>
             </div>
         </div>
@@ -574,7 +589,7 @@
                 auto-rotate rotation-per-second="18deg"
                 shadow-intensity="1.2" shadow-softness="0.8"
                 exposure="1.05" environment-image="neutral"
-                loading="eager" interaction-prompt="auto"
+                interaction-prompt="auto"
             >
                 <button slot="ar-button" class="ar-btn">
                     <span class="ring"></span>
@@ -586,18 +601,9 @@
             <div class="handle"></div>
             <div class="section-title">Commandes 3D</div>
             <div class="gestures">
-                <div class="gesture">
-                    <div class="gesture-icon">&#x1f446;</div>
-                    <div class="gesture-label"><strong>1 doigt</strong>Tourner</div>
-                </div>
-                <div class="gesture">
-                    <div class="gesture-icon">&#x1f90f;</div>
-                    <div class="gesture-label"><strong>Pincer</strong>Zoomer</div>
-                </div>
-                <div class="gesture">
-                    <div class="gesture-icon">&#x270c;&#xfe0f;</div>
-                    <div class="gesture-label"><strong>2 doigts</strong>Déplacer</div>
-                </div>
+                <div class="gesture"><div class="gesture-icon">&#x1f446;</div><div class="gesture-label"><strong>1 doigt</strong>Tourner</div></div>
+                <div class="gesture"><div class="gesture-icon">&#x1f90f;</div><div class="gesture-label"><strong>Pincer</strong>Zoomer</div></div>
+                <div class="gesture"><div class="gesture-icon">&#x270c;&#xfe0f;</div><div class="gesture-label"><strong>2 doigts</strong>Déplacer</div></div>
             </div>
             <div class="section-title">En réalité augmentée</div>
             <div class="ar-steps">
@@ -605,19 +611,17 @@
                 <div class="step"><span class="step-n">2</span><span class="step-t">Visez le mur avec la caméra</span></div>
                 <div class="step"><span class="step-n">3</span><span class="step-t"><strong>1 doigt</strong> = déplacer &middot; <strong>2 doigts</strong> = pivoter &middot; <strong>Pincer</strong> = redimensionner</span></div>
             </div>
-            <button class="nav-btn" onclick="navigate('tv')">
-                Voir l'étagère TV &rarr;
-            </button>
+            <button class="nav-btn" data-target="tv">Voir l'étagère TV &rarr;</button>
         </div>
     </div>
 
     <!-- ═══════════ ÉTAGÈRE TV ═══════════ -->
-    <div class="screen hidden-right viewer-screen" id="tv">
+    <div class="screen viewer-screen" id="tv">
         <div class="viewer-header">
-            <button class="btn-back" onclick="navigate('home')">&larr;</button>
+            <button class="btn-back" data-target="home">&larr;</button>
             <div class="header-logo"><img src="assets/logo-bois.png" alt="JB4WOOD"></div>
             <div class="header-text">
-                <h2>Étagère TV</h2>
+                <h2 class="eras">Étagère TV</h2>
                 <p>Projet Sylvie &middot; Mur côté télévision</p>
             </div>
         </div>
@@ -635,7 +639,7 @@
                 auto-rotate rotation-per-second="18deg"
                 shadow-intensity="1.2" shadow-softness="0.8"
                 exposure="1.05" environment-image="neutral"
-                loading="eager" interaction-prompt="auto"
+                interaction-prompt="auto"
             >
                 <button slot="ar-button" class="ar-btn">
                     <span class="ring"></span>
@@ -647,18 +651,9 @@
             <div class="handle"></div>
             <div class="section-title">Commandes 3D</div>
             <div class="gestures">
-                <div class="gesture">
-                    <div class="gesture-icon">&#x1f446;</div>
-                    <div class="gesture-label"><strong>1 doigt</strong>Tourner</div>
-                </div>
-                <div class="gesture">
-                    <div class="gesture-icon">&#x1f90f;</div>
-                    <div class="gesture-label"><strong>Pincer</strong>Zoomer</div>
-                </div>
-                <div class="gesture">
-                    <div class="gesture-icon">&#x270c;&#xfe0f;</div>
-                    <div class="gesture-label"><strong>2 doigts</strong>Déplacer</div>
-                </div>
+                <div class="gesture"><div class="gesture-icon">&#x1f446;</div><div class="gesture-label"><strong>1 doigt</strong>Tourner</div></div>
+                <div class="gesture"><div class="gesture-icon">&#x1f90f;</div><div class="gesture-label"><strong>Pincer</strong>Zoomer</div></div>
+                <div class="gesture"><div class="gesture-icon">&#x270c;&#xfe0f;</div><div class="gesture-label"><strong>2 doigts</strong>Déplacer</div></div>
             </div>
             <div class="section-title">En réalité augmentée</div>
             <div class="ar-steps">
@@ -666,45 +661,62 @@
                 <div class="step"><span class="step-n">2</span><span class="step-t">Visez le mur avec la caméra</span></div>
                 <div class="step"><span class="step-n">3</span><span class="step-t"><strong>1 doigt</strong> = déplacer &middot; <strong>2 doigts</strong> = pivoter &middot; <strong>Pincer</strong> = redimensionner</span></div>
             </div>
-            <button class="nav-btn" onclick="navigate('canape')">
-                &larr; Voir l'étagère Canapé
-            </button>
+            <button class="nav-btn" data-target="canape">&larr; Voir l'étagère Canapé</button>
         </div>
     </div>
 
     <script>
-        // Navigation
-        let current = 'home';
-        const screens = { home: document.getElementById('home'), canape: document.getElementById('canape'), tv: document.getElementById('tv') };
+        // ═══════════ NAVIGATION ═══════════
+        let currentScreen = 'home';
 
-        function navigate(target) {
-            if (target === current) return;
-            const from = screens[current];
-            const to = screens[target];
+        function navigate(target, direction) {
+            if (target === currentScreen) return;
+            const fromEl = document.getElementById(currentScreen);
+            const toEl = document.getElementById(target);
 
-            // Direction: home is "left", viewers are "right"
-            const goingDeeper = (current === 'home') || (current === 'canape' && target === 'tv');
+            // Hide current
+            fromEl.classList.remove('active', 'fade-back');
+            fromEl.style.display = 'none';
 
-            from.classList.remove('active');
-            from.classList.add(goingDeeper ? 'hidden-left' : 'hidden-right');
+            // Show target
+            toEl.style.display = 'flex';
+            // Force reflow so animation triggers
+            toEl.offsetHeight;
+            toEl.classList.add('active');
+            if (direction === 'back') {
+                toEl.classList.add('fade-back');
+            }
 
-            to.classList.remove('hidden-left', 'hidden-right');
-            to.classList.add('active');
+            currentScreen = target;
 
-            current = target;
+            // Force model-viewer to recalculate size
+            requestAnimationFrame(() => {
+                window.dispatchEvent(new Event('resize'));
+            });
         }
 
-        // Loaders
-        document.getElementById('mv-canape').addEventListener('load', () => {
-            document.getElementById('loader-canape').classList.add('hidden');
+        // Event delegation for all navigation buttons
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-target]');
+            if (!btn) return;
+            const target = btn.dataset.target;
+            const isBack = btn.classList.contains('btn-back') || target === 'home';
+            navigate(target, isBack ? 'back' : 'forward');
         });
-        document.getElementById('mv-tv').addEventListener('load', () => {
-            document.getElementById('loader-tv').classList.add('hidden');
+
+        // ═══════════ LOADERS ═══════════
+        const viewers = ['mv-canape', 'mv-tv'];
+        viewers.forEach(id => {
+            const mv = document.getElementById(id);
+            const loader = document.getElementById('loader-' + id.replace('mv-', ''));
+            if (mv && loader) {
+                mv.addEventListener('load', () => loader.classList.add('hidden'));
+            }
         });
+        // Fallback
         setTimeout(() => {
-            document.getElementById('loader-canape').classList.add('hidden');
-            document.getElementById('loader-tv').classList.add('hidden');
-        }, 8000);
+            document.querySelectorAll('.loading').forEach(l => l.classList.add('hidden'));
+        }, 10000);
     </script>
 </body>
 </html>
