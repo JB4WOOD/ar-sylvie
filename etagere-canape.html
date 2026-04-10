@@ -4,90 +4,395 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JB4WOOD - Étagère Canapé | Sylvie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
+        :root {
+            --wood-dark: #2c1e14;
+            --wood-mid: #5a3e2b;
+            --cream: #faf6f1;
+            --cream-dark: #f0e8dd;
+            --gold: #c8a45e;
+            --gold-light: #e8d5a0;
+            --text: #3a2e26;
+            --text-soft: #6b5d52;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f5f0eb;
-            color: #3a2e26;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--cream);
+            color: var(--text);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
+
+        /* Header */
         header {
-            background: #3a2e26;
-            color: #f5f0eb;
+            background: linear-gradient(135deg, var(--wood-dark) 0%, var(--wood-mid) 100%);
+            color: var(--cream);
             padding: 16px 24px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
         }
-        header h1 {
-            font-size: 1.1rem;
+
+        header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(200,164,94,0.1) 0%, transparent 50%);
+        }
+
+        .header-logo {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--gold);
+            position: relative;
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        .header-text {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
             font-weight: 600;
             letter-spacing: 0.05em;
         }
-        header p {
-            font-size: 0.85rem;
-            opacity: 0.7;
-            margin-top: 4px;
+
+        .header-text p {
+            font-size: 0.75rem;
+            opacity: 0.6;
+            margin-top: 2px;
+            font-weight: 300;
         }
-        .viewer-container {
+
+        .back-btn {
+            position: relative;
+            z-index: 1;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--cream);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background 0.3s;
+            flex-shrink: 0;
+        }
+
+        .back-btn:hover { background: rgba(255,255,255,0.2); }
+
+        /* Viewer */
+        .viewer-section {
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 16px;
-            gap: 12px;
+            position: relative;
         }
+
         model-viewer {
             width: 100%;
             flex: 1;
-            min-height: 55vh;
-            border-radius: 12px;
-            background: #fff;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            --poster-color: #f5f0eb;
+            min-height: 50vh;
+            background: linear-gradient(180deg, #f7f3ee 0%, #ede5da 100%);
+            --poster-color: transparent;
+            --progress-bar-color: var(--gold);
+            --progress-bar-height: 3px;
         }
-        model-viewer::part(default-ar-button) {
-            bottom: 16px;
-            right: 16px;
+
+        /* Custom AR button */
+        .ar-button-custom {
+            background: linear-gradient(135deg, var(--wood-dark), var(--wood-mid));
+            color: var(--cream);
+            border: none;
+            border-radius: 14px;
+            padding: 14px 24px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 32px rgba(44,30,20,0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+            white-space: nowrap;
         }
-        .instructions {
-            background: #fff;
-            border-radius: 12px;
-            padding: 16px 20px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+
+        .ar-button-custom:hover {
+            transform: translateX(-50%) translateY(-2px) scale(1.03);
+            box-shadow: 0 12px 40px rgba(44,30,20,0.4);
         }
-        .instructions h2 {
+
+        .ar-button-custom:active {
+            transform: translateX(-50%) scale(0.97);
+        }
+
+        .ar-button-custom .ar-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(200,164,94,0.25);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .ar-button-custom .pulse-ring {
+            position: absolute;
+            inset: -3px;
+            border-radius: 17px;
+            border: 2px solid var(--gold);
+            opacity: 0;
+            animation: arPulse 2.5s ease-out infinite;
+        }
+
+        @keyframes arPulse {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.08); }
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, #f7f3ee 0%, #ede5da 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            z-index: 3;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--cream-dark);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            font-weight: 400;
+        }
+
+        /* Bottom panel */
+        .bottom-panel {
+            background: white;
+            border-radius: 24px 24px 0 0;
+            padding: 24px 20px 28px;
+            box-shadow: 0 -4px 30px rgba(44,30,20,0.06);
+            position: relative;
+            z-index: 5;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .panel-handle {
+            width: 36px;
+            height: 4px;
+            background: var(--cream-dark);
+            border-radius: 2px;
+            margin: 0 auto 18px;
+        }
+
+        /* Gesture hints */
+        .gesture-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .gesture-item {
+            text-align: center;
+            padding: 12px 6px;
+            background: var(--cream);
+            border-radius: 14px;
+            transition: transform 0.2s;
+        }
+
+        .gesture-item:active { transform: scale(0.95); }
+
+        .gesture-icon {
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+        }
+
+        .gesture-label {
+            font-size: 0.7rem;
+            color: var(--text-soft);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .gesture-label strong {
+            display: block;
+            color: var(--text);
+            font-size: 0.72rem;
+            margin-bottom: 2px;
+        }
+
+        /* Section title */
+        .section-title {
+            font-family: 'Playfair Display', serif;
             font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        /* AR instructions */
+        .ar-instructions {
+            background: linear-gradient(135deg, rgba(200,164,94,0.08), rgba(200,164,94,0.03));
+            border: 1px solid rgba(200,164,94,0.15);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 18px;
+        }
+
+        .ar-instructions p {
+            font-size: 0.8rem;
+            color: var(--text-soft);
+            line-height: 1.6;
+        }
+
+        .ar-instructions .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
             margin-bottom: 8px;
         }
-        .instructions ul {
-            font-size: 0.85rem;
-            padding-left: 20px;
-            line-height: 1.6;
-            color: #5a4a3a;
+
+        .ar-instructions .step:last-child { margin-bottom: 0; }
+
+        .step-num {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
         }
-        .nav-link {
-            display: block;
-            text-align: center;
-            padding: 14px;
-            background: #3a2e26;
-            color: #f5f0eb;
+
+        .step-text {
+            font-size: 0.8rem;
+            color: var(--text-soft);
+            line-height: 1.5;
+        }
+
+        /* Navigation */
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--wood-dark), var(--wood-mid));
+            color: var(--cream);
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 16px rgba(44,30,20,0.15);
         }
-        .nav-link:hover { background: #4a3e36; }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(44,30,20,0.2);
+        }
+
+        .nav-btn:active { transform: scale(0.98); }
+
+        /* Responsive */
+        @media (min-height: 800px) {
+            model-viewer { min-height: 55vh; }
+        }
+
+        @media (max-width: 360px) {
+            .gesture-grid { gap: 6px; }
+            .gesture-item { padding: 10px 4px; }
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>JB4WOOD</h1>
-        <p>Étagère Canapé - Projet Sylvie</p>
+        <a href="index.html" class="back-btn">&larr;</a>
+        <div class="header-logo">JB</div>
+        <div class="header-text">
+            <h1>Étagère Canapé</h1>
+            <p>Projet Sylvie &middot; Mur côté canapé</p>
+        </div>
     </header>
-    <div class="viewer-container">
+
+    <div class="viewer-section">
+        <div class="loading-overlay" id="loader">
+            <div class="loader"></div>
+            <div class="loading-text">Chargement du modèle 3D...</div>
+        </div>
+
         <model-viewer
+            id="viewer"
             src="etagere-canape.glb"
             alt="Étagère murale côté canapé - JB4WOOD"
             ar
@@ -96,38 +401,79 @@
             camera-controls
             touch-action="pan-y"
             auto-rotate
-            shadow-intensity="1"
-            exposure="1"
+            rotation-per-second="18deg"
+            shadow-intensity="1.2"
+            shadow-softness="0.8"
+            exposure="1.05"
+            environment-image="neutral"
             loading="eager"
+            interaction-prompt="auto"
         >
-            <button slot="ar-button" style="
-                background: #3a2e26;
-                color: #f5f0eb;
-                border: none;
-                border-radius: 8px;
-                padding: 10px 20px;
-                font-size: 0.9rem;
-                font-weight: 600;
-                cursor: pointer;
-                position: absolute;
-                bottom: 16px;
-                right: 16px;
-            ">
+            <button slot="ar-button" class="ar-button-custom">
+                <span class="pulse-ring"></span>
+                <span class="ar-icon">&#x1f4f1;</span>
                 Voir dans ma pièce
             </button>
         </model-viewer>
-        <div class="instructions">
-            <h2>Comment tester dans votre pièce ?</h2>
-            <ul>
-                <li>Tournez le modèle avec le doigt pour le voir sous tous les angles</li>
-                <li>Pincez pour zoomer / dézoomer</li>
-                <li>Appuyez sur <strong>"Voir dans ma pièce"</strong> pour placer l'étagère via la caméra</li>
-                <li><strong>1 doigt</strong> : déplacer l'étagère</li>
-                <li><strong>2 doigts</strong> : pivoter l'étagère pour l'orienter comme il faut</li>
-                <li><strong>Pincer</strong> : agrandir / réduire</li>
-            </ul>
-        </div>
-        <a href="etagere-tv.html" class="nav-link">Voir l'étagère TV &rarr;</a>
     </div>
+
+    <div class="bottom-panel">
+        <div class="panel-handle"></div>
+
+        <div class="section-title">Commandes 3D</div>
+        <div class="gesture-grid">
+            <div class="gesture-item">
+                <div class="gesture-icon">&#x1f446;</div>
+                <div class="gesture-label">
+                    <strong>1 doigt</strong>
+                    Tourner
+                </div>
+            </div>
+            <div class="gesture-item">
+                <div class="gesture-icon">&#x1f90f;</div>
+                <div class="gesture-label">
+                    <strong>Pincer</strong>
+                    Zoomer
+                </div>
+            </div>
+            <div class="gesture-item">
+                <div class="gesture-icon">&#x270c;&#xfe0f;</div>
+                <div class="gesture-label">
+                    <strong>2 doigts</strong>
+                    Déplacer
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">En réalité augmentée</div>
+        <div class="ar-instructions">
+            <div class="step">
+                <span class="step-num">1</span>
+                <span class="step-text">Appuyez sur <strong>"Voir dans ma pièce"</strong></span>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span>
+                <span class="step-text">Visez le mur avec la caméra, l'étagère se pose automatiquement</span>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span>
+                <span class="step-text"><strong>1 doigt</strong> pour déplacer &middot; <strong>2 doigts</strong> pour pivoter &middot; <strong>Pincer</strong> pour redimensionner</span>
+            </div>
+        </div>
+
+        <a href="etagere-tv.html" class="nav-btn">
+            Voir l'étagère TV &rarr;
+        </a>
+    </div>
+
+    <script>
+        const viewer = document.getElementById('viewer');
+        const loader = document.getElementById('loader');
+        viewer.addEventListener('load', () => {
+            loader.classList.add('hidden');
+        });
+        // Fallback si le chargement est long
+        setTimeout(() => loader.classList.add('hidden'), 8000);
+    </script>
 </body>
 </html>
