@@ -37,11 +37,36 @@
             font-family: 'Inter', -apple-system, sans-serif;
             color: var(--text);
             background: var(--beton);
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* ═══════════ ERAS BOLD PARTOUT ═══════════ */
         .eras {
             font-family: 'ErasBold', 'Arial Black', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        /* ═══════════ SHIMMER EFFECT ═══════════ */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 4px 16px rgba(26,74,46,0.2); }
+            50% { box-shadow: 0 6px 28px rgba(26,74,46,0.35), 0 0 12px rgba(184,149,74,0.15); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         /* ═══════════ SCREENS ═══════════ */
@@ -110,23 +135,30 @@
 
         .logo img { width: 100%; height: 100%; object-fit: cover; }
 
+        .logo {
+            animation: scaleIn 0.6s ease-out;
+        }
+
         .brand-name {
             font-family: 'ErasBold', 'Arial Black', sans-serif;
-            font-size: 2.1rem;
+            font-size: 2.3rem;
             color: var(--or-bois);
-            letter-spacing: 0.04em;
+            letter-spacing: 0.05em;
             line-height: 1;
+            animation: slideInUp 0.6s ease-out 0.15s both;
+            text-shadow: 0 2px 8px rgba(184,149,74,0.15);
         }
 
         .brand-tagline {
             font-family: 'Playfair Display', serif;
             font-weight: 600;
             font-style: italic;
-            font-size: 0.82rem;
+            font-size: 0.9rem;
             color: var(--vert);
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            margin-top: 5px;
+            margin-top: 6px;
+            animation: slideInUp 0.6s ease-out 0.3s both;
         }
 
         .card {
@@ -138,17 +170,18 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(184,149,74,0.12);
             border-radius: 20px;
-            padding: 24px 22px;
+            padding: 28px 24px;
             box-shadow: 0 8px 40px rgba(26,74,46,0.07), 0 2px 10px rgba(0,0,0,0.03);
             width: 100%;
+            animation: slideInUp 0.6s ease-out 0.4s both;
         }
 
         .greeting {
-            font-size: 0.95rem;
-            line-height: 1.65;
+            font-size: 1.05rem;
+            line-height: 1.7;
             color: var(--text-soft);
             text-align: center;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
         }
 
         .greeting strong { color: var(--vert); font-weight: 600; }
@@ -162,34 +195,60 @@
         .project-card {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 16px 18px;
+            gap: 16px;
+            padding: 18px 20px;
             background: linear-gradient(135deg, var(--vert) 0%, var(--vert-light) 100%);
             color: var(--blanc);
             border: none;
-            border-radius: 14px;
+            border-radius: 16px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
             text-align: left;
             font-family: inherit;
             width: 100%;
             -webkit-tap-highlight-color: transparent;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0s; }
+        .project-card:nth-child(2) { animation-delay: 1.5s; }
+
+        /* Shimmer sweep */
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+            transition: none;
+            z-index: 1;
+        }
+
+        .project-card:hover::before {
+            animation: shimmerSweep 0.6s ease-out;
+        }
+
+        @keyframes shimmerSweep {
+            from { left: -60%; }
+            to { left: 120%; }
         }
 
         .project-card::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(184,149,74,0.15) 0%, transparent 60%);
+            background: linear-gradient(135deg, rgba(184,149,74,0.2) 0%, transparent 60%);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.35s;
         }
 
-        .project-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,74,46,0.3); }
+        .project-card:hover {
+            transform: translateY(-3px) scale(1.015);
+            box-shadow: 0 10px 36px rgba(26,74,46,0.35), 0 0 16px rgba(184,149,74,0.12);
+        }
         .project-card:hover::after { opacity: 1; }
-        .project-card:active { transform: scale(0.97); }
+        .project-card:active { transform: scale(0.96); transition-duration: 0.1s; }
 
         .project-icon {
             width: 44px; height: 44px;
@@ -205,24 +264,29 @@
 
         .project-name {
             font-family: 'ErasBold', 'Arial Black', sans-serif;
-            font-size: 0.95rem;
-            margin-bottom: 2px;
+            font-size: 1.05rem;
+            margin-bottom: 3px;
+            letter-spacing: 0.02em;
         }
 
-        .project-desc { font-size: 0.78rem; opacity: 0.7; font-weight: 300; }
+        .project-desc { font-size: 0.82rem; opacity: 0.7; font-weight: 400; }
 
         .project-arrow {
-            font-size: 1.1rem; opacity: 0.5;
-            transition: all 0.3s;
+            font-size: 1.3rem; opacity: 0.4;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative; z-index: 1;
         }
 
-        .project-card:hover .project-arrow { opacity: 1; transform: translateX(3px); }
+        .project-card:hover .project-arrow { opacity: 1; transform: translateX(6px); }
 
         .footer-badge {
             flex-shrink: 0;
             text-align: center;
             padding: 14px 0 4px;
+        }
+
+        .footer-badge {
+            animation: slideInUp 0.6s ease-out 0.6s both;
         }
 
         .badge {
@@ -233,7 +297,7 @@
             background: rgba(26,74,46,0.06);
             border: 1px solid rgba(26,74,46,0.1);
             border-radius: 24px;
-            font-size: 0.73rem;
+            font-size: 0.78rem;
             color: var(--vert);
             font-weight: 500;
         }
@@ -311,7 +375,8 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        .btn-back:hover { background: rgba(255,255,255,0.22); }
+        .btn-back:hover { background: rgba(255,255,255,0.22); transform: scale(1.08); }
+        .btn-back:active { transform: scale(0.92); }
 
         .header-logo {
             width: 36px; height: 36px;
@@ -328,11 +393,11 @@
 
         .header-text h2 {
             font-family: 'ErasBold', 'Arial Black', sans-serif;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             letter-spacing: 0.03em;
         }
 
-        .header-text p { font-size: 0.72rem; opacity: 0.6; margin-top: 1px; font-weight: 300; }
+        .header-text p { font-size: 0.78rem; opacity: 0.65; margin-top: 2px; font-weight: 400; }
 
         .viewer-body {
             flex: 1;
@@ -359,37 +424,62 @@
             background: linear-gradient(135deg, var(--vert), var(--vert-light));
             color: var(--blanc);
             border: none;
-            border-radius: 14px;
-            padding: 13px 22px;
+            border-radius: 16px;
+            padding: 15px 26px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.88rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             position: absolute;
-            bottom: 16px; left: 50%;
+            bottom: 20px; left: 50%;
             transform: translateX(-50%);
             display: flex; align-items: center; gap: 10px;
             box-shadow: 0 6px 24px rgba(26,74,46,0.35);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 5;
             white-space: nowrap;
             -webkit-tap-highlight-color: transparent;
+            animation: floatBtn 3s ease-in-out infinite;
+            overflow: hidden;
         }
 
-        .ar-btn:hover { transform: translateX(-50%) translateY(-2px); box-shadow: 0 10px 32px rgba(26,74,46,0.45); }
-        .ar-btn:active { transform: translateX(-50%) scale(0.97); }
+        @keyframes floatBtn {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-4px); }
+        }
+
+        .ar-btn:hover {
+            transform: translateX(-50%) translateY(-4px) scale(1.04);
+            box-shadow: 0 12px 40px rgba(26,74,46,0.45), 0 0 20px rgba(184,149,74,0.15);
+            animation: none;
+        }
+        .ar-btn:active { transform: translateX(-50%) scale(0.96); animation: none; }
+
+        /* Shimmer on AR button */
+        .ar-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            animation: arShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes arShimmer {
+            0%, 70% { left: -50%; }
+            100% { left: 150%; }
+        }
 
         .ar-btn .ring {
-            position: absolute; inset: -3px;
-            border-radius: 17px;
+            position: absolute; inset: -4px;
+            border-radius: 20px;
             border: 2px solid var(--or-bois);
             opacity: 0;
             animation: arPulse 2.5s ease-out infinite;
         }
 
         @keyframes arPulse {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 0; transform: scale(1.06); }
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.08); }
         }
 
         .loading {
@@ -441,7 +531,7 @@
             font-family: 'Playfair Display', serif;
             font-weight: 600;
             font-style: italic;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--vert);
             margin-bottom: 10px;
         }
@@ -455,14 +545,20 @@
 
         .gesture {
             text-align: center;
-            padding: 10px 4px;
+            padding: 12px 6px;
             background: var(--beton-light);
             border-radius: 12px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .gesture-icon { font-size: 1.3rem; margin-bottom: 4px; }
-        .gesture-label { font-size: 0.68rem; color: var(--text-soft); font-weight: 500; line-height: 1.3; }
-        .gesture-label strong { display: block; color: var(--text); font-size: 0.7rem; margin-bottom: 1px; }
+        .gesture:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .gesture-icon { font-size: 1.4rem; margin-bottom: 5px; }
+        .gesture-label { font-size: 0.75rem; color: var(--text-soft); font-weight: 500; line-height: 1.35; }
+        .gesture-label strong { display: block; color: var(--text); font-size: 0.78rem; margin-bottom: 2px; }
 
         .ar-steps {
             background: linear-gradient(135deg, rgba(26,74,46,0.05), rgba(184,149,74,0.04));
@@ -485,31 +581,48 @@
             flex-shrink: 0; margin-top: 1px;
         }
 
-        .step-t { font-size: 0.78rem; color: var(--text-soft); line-height: 1.45; }
+        .step-t { font-size: 0.82rem; color: var(--text-soft); line-height: 1.5; }
 
         .nav-btn {
             display: flex;
             align-items: center; justify-content: center;
-            gap: 8px; width: 100%; padding: 14px;
+            gap: 10px; width: 100%; padding: 16px;
             background: linear-gradient(135deg, var(--vert), var(--vert-light));
             color: var(--blanc);
-            border: none; border-radius: 12px;
+            border: none; border-radius: 14px;
             font-family: 'Inter', sans-serif;
-            font-weight: 600; font-size: 0.88rem;
+            font-weight: 600; font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 14px rgba(26,74,46,0.18);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 16px rgba(26,74,46,0.2);
             -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow: hidden;
         }
 
-        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,74,46,0.25); }
-        .nav-btn:active { transform: scale(0.98); }
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: none;
+        }
+
+        .nav-btn:hover::before {
+            animation: shimmerSweep 0.5s ease-out;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 28px rgba(26,74,46,0.3), 0 0 12px rgba(184,149,74,0.1);
+        }
+        .nav-btn:active { transform: scale(0.97); transition-duration: 0.1s; }
 
         /* ═══════════ RESPONSIVE ═══════════ */
         @media (max-height: 650px) {
             .hero { padding: 6px 0 10px; }
             .logo { width: 60px; height: 60px; }
-            .brand-name { font-size: 1.5rem; }
+            .brand-name { font-size: 1.6rem; }
             .brand-tagline { font-size: 0.7rem; }
             .card { padding: 16px 18px; }
             .greeting { font-size: 0.85rem; margin-bottom: 14px; }
@@ -529,7 +642,7 @@
         @media (min-height: 800px) {
             .hero { padding: 24px 0; }
             .logo { width: 100px; height: 100px; }
-            .brand-name { font-size: 2.4rem; }
+            .brand-name { font-size: 2.6rem; }
             .card { padding: 32px 26px; }
             .greeting { font-size: 1rem; margin-bottom: 28px; }
         }
